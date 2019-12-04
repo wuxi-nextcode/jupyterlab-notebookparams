@@ -14,7 +14,7 @@ const extension: JupyterFrontEndPlugin<void> = {
   activate: activateExtension
 };
 
-const PARAM_CELL_PARAMETERS = "# Parameters:"
+const PARAM_CELL_PARAMETERS = "# Parameters:";
 let autorun = false;
 
 function generateParamAssignment(params: URLSearchParams, language: String): String {
@@ -24,7 +24,7 @@ function generateParamAssignment(params: URLSearchParams, language: String): Str
 
       autorun = (value == 'true');
 
-    } else if (key != 'filepath') {
+    } else {
 
       let v = value;
 
@@ -59,11 +59,11 @@ function activateExtension(app: JupyterFrontEnd, notebooks: INotebookTracker) : 
           let searchParams = new URL(window.location.href).searchParams;
           let text = generateParamAssignment(searchParams,panel.model.defaultKernelLanguage);
           if (text) {
-            cell.value.text = PARAM_CELL_PARAMETERS + '\n' + text
+            cell.value.text = PARAM_CELL_PARAMETERS + '\n' + text;
             console.log('jupyterlab-notebookparams: setting parameters in cell ' + cell);
           }
           if(autorun) {
-            NotebookActions.runAll(panel.content,panel.session).then(r => console.log("jupyterlab-notebookparams: Autorun done."));
+            NotebookActions.runAll(panel.content,panel.session).then(() => console.log("jupyterlab-notebookparams: Autorun done."));
           }
           break;
         }
@@ -72,4 +72,5 @@ function activateExtension(app: JupyterFrontEnd, notebooks: INotebookTracker) : 
   });
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default extension;
