@@ -1,0 +1,47 @@
+{
+  "name": "@wuxinextcode/jupyterlab-notebookparams",
+  "version": "1.0.0",
+  "description": "A JupyterLab extension that populates notebooks with URL parameters",
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab-extension"
+  ],
+  "homepage": "https://github.com/wuxi-nextcode/jupyterlab-notebookparams",
+  "bugs": {
+    "url": "https://github.com/wuxi-nextcode/jupyterlab-notebookparams/issues"
+  },
+  "license": "MIT",
+  "author": "Ólafur Haukur Flygenring <olafurh@wuxinextcode.com>",
+  "files": [
+    "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
+    "style/**/*.{css,eot,gif,html,jpg,json,png,svg,woff2,ttf}"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "style": "style/index.css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wuxi-nextcode/jupyterlab-notebookparams.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib && rimraf tsconfig.tsbuildinfo",
+    "prepare": "npm run clean && npm run build",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^1.0.0",
+    "@jupyterlab/notebook": "^1.0.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "typescript": "~3.5.2"
+  },
+  "sideEffects": [
+    "style/*.css"
+  ],
+  "jupyterlab": {
+    "extension": true
+  }
+}
