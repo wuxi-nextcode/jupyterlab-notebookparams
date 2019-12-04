@@ -2,6 +2,8 @@
 
 A JupyterLab extension that populates notebooks with URL parameters.
 
+Functionality lifted from https://github.com/manics/jupyter-notebookparams and made into a jupyterlab extension.
+
 
 ## Prerequisites
 
@@ -29,4 +31,3 @@ To rebuild the package and the JupyterLab app:
 npm run build
 jupyter lab build
 ```
-
