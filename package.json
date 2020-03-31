@@ -1,6 +1,6 @@
 {
   "name": "@wuxinextcode/jupyterlab-notebookparams",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A JupyterLab extension that populates notebooks with URL parameters",
   "keywords": [
     "jupyter",
@@ -31,12 +31,12 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@jupyterlab/application": "^1.0.0",
-    "@jupyterlab/notebook": "^1.0.0"
+    "@jupyterlab/application": "^2.0.0",
+    "@jupyterlab/notebook": "^2.0.0"
   },
   "devDependencies": {
-    "rimraf": "^2.6.1",
-    "typescript": "~3.5.2"
+    "rimraf": "~3.0.0",
+    "typescript": "~3.7.3"
   },
   "sideEffects": [
     "style/*.css"
