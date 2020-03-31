@@ -20,10 +20,9 @@ let autorun = false;
 function generateParamAssignment(params: URLSearchParams, language: String): String {
   let text = "";
   for(const [key, value] of params) {
+
     if (key == 'autorun') {
-
       autorun = (value == 'true');
-
     } else {
 
       let v = value;
@@ -52,7 +51,7 @@ function activateExtension(app: JupyterFrontEnd, notebooks: INotebookTracker) : 
 
   notebooks.widgetAdded.connect((sender, panel: NotebookPanel) => {
 
-    panel.session.ready.then(() => {
+    panel.sessionContext.ready.then(() => {
       for(let i = 0; i < panel.model.cells.length; i++) {
         let cell = panel.model.cells.get(i);
         if(cell.value.text.startsWith(PARAM_CELL_PARAMETERS)) {
@@ -63,7 +62,7 @@ function activateExtension(app: JupyterFrontEnd, notebooks: INotebookTracker) : 
             console.log('jupyterlab-notebookparams: setting parameters in cell ' + cell);
           }
           if(autorun) {
-            NotebookActions.runAll(panel.content,panel.session).then(() => console.log("jupyterlab-notebookparams: Autorun done."));
+            NotebookActions.runAll(panel.content,panel.sessionContext).then(() => console.log("jupyterlab-notebookparams: Autorun done."));
           }
           break;
         }
