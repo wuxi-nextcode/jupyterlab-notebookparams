@@ -15,11 +15,15 @@ const extension: JupyterFrontEndPlugin<void> = {
 };
 
 const PARAM_CELL_PARAMETERS = "# Parameters:";
+const FILTERED_PARAMS = ["reset", "clone"];
 let autorun = false;
 
 function generateParamAssignment(params: URLSearchParams, language: String): String {
   let text = "";
   for(const [key, value] of params) {
+    if (FILTERED_PARAMS.includes(key)) {
+      continue;
+    }
 
     if (key == 'autorun') {
       autorun = (value == 'true');
@@ -48,6 +52,7 @@ function generateParamAssignment(params: URLSearchParams, language: String): Str
 
 function activateExtension(app: JupyterFrontEnd, notebooks: INotebookTracker) : void {
   console.log('JupyterLab extension jupyterlab-notebookparams is activated!');
+  const href = window.location.href;
 
   notebooks.widgetAdded.connect((sender, panel: NotebookPanel) => {
 
@@ -55,7 +60,7 @@ function activateExtension(app: JupyterFrontEnd, notebooks: INotebookTracker) : 
       for(let i = 0; i < panel.model.cells.length; i++) {
         let cell = panel.model.cells.get(i);
         if(cell.value.text.startsWith(PARAM_CELL_PARAMETERS)) {
-          let searchParams = new URL(window.location.href).searchParams;
+          let searchParams = new URL(href).searchParams;
           let text = generateParamAssignment(searchParams,panel.model.defaultKernelLanguage);
           if (text) {
             cell.value.text = PARAM_CELL_PARAMETERS + '\n' + text;
